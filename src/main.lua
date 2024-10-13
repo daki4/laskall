@@ -1,8 +1,8 @@
 require("laskall")
 
 function Main()
-  local valSome = Some(111)
   local valNone = None()
+  local valSome = Some(111)
 
   local resultOk = Ok(valSome)
   local resultErr = Err(valNone)

@@ -1,35 +1,16 @@
 require("common")
 
-local function bindResult(istate, ivalue)
-  local value = ivalue
-  local state = istate
-
-  local result = {}
-
-  function result:match(cases)
-    for key, _ in pairs(cases) do
-      if not ContainsValue({Any, Ok, Err}, key) then
-        error(key .." is not a valid member of type result")
-      end
-    end
-
-    if ContainsKey(cases, state) then
-        return cases[state](value)
-    end
-
-    if ContainsKey(cases, Any) then
-      return cases[Any]()
-    end
-  end
-
-  return result
-end
+local result = BuildAdt("Result")
 
 function Ok(value)
-  return bindResult(Ok, value)
+  return result:AdtCtor(Ok, value)
 end
 
 function Err(error)
-  return bindResult(Err, error)
+  return result:AdtCtor(Err, error)
 end
 
+result:Register(Ok, "Ok(T)", true)
+result:Register(Err, "Err(E)", true)
+
+MakeReadOnly(result)
