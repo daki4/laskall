@@ -1,16 +1,24 @@
 require("adt")
 
-local option = BuildAdt("Option")
+local optionFactory = BuildAdt("Option")
 
 function Some(value)
-  return option:AdtCtor(Some, value)
+    return optionFactory:AdtCtor(Some, value)
 end
 
 function None()
-  return option:AdtCtor(None, nil)
+    return optionFactory:AdtCtor(None, nil)
 end
 
-option:Register(Some, "Some(T)", true)
-option:Register(None, "None", false)
+function optionFactory.baseState:Map(to_execute)
+  return optionFactory.baseState:match({
+    [Some] = to_execute,
+    [None] = None
+  })
+end
 
-MakeReadOnly(option)
+
+optionFactory:Register(Some, "Some(T)", true)
+optionFactory:Register(None, "None", false)
+
+

@@ -1,4 +1,5 @@
 fn main() {
+    let error = Error::IdkError;
     let valSome: Option<i32> = Some(111);
     let valNone: Option<i32> = None;
     let valSomeClone = valSome.clone();
@@ -6,7 +7,7 @@ fn main() {
 
     let resultOk: Result<Option<i32>, Option<i32>> = Ok(valSome);
     let resultErr: Result<Option<i32>, Option<i32>> = Err(valNone);
-    
+
     fn optPatternMatch(value: Option<i32>) -> i32 {
         match value {
             Some(val) => val,
@@ -24,6 +25,12 @@ fn main() {
     println!("Option returned: {}", optPatternMatch(valSomeClone));
     println!("Option returned: {}", optPatternMatch(valNoneClone));
 
-    println!("Result returned: {}", optPatternMatch(resPatternMatch(resultOk)));
-    println!("Result returned: {}", optPatternMatch(resPatternMatch(resultErr)));
+    println!(
+        "Result returned: {}",
+        optPatternMatch(resPatternMatch(resultOk))
+    );
+    println!(
+        "Result returned: {}",
+        optPatternMatch(resPatternMatch(resultErr))
+    );
 }
