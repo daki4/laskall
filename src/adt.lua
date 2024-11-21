@@ -47,7 +47,6 @@ function BuildAdt(typename)
       error("states needs to be a list")
     end
 
-
     function adtFactory.baseState:match(cases)
       for key, _ in pairs(cases) do
         if not containsCase(states, key) then

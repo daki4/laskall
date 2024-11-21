@@ -30,10 +30,20 @@ function Main()
   print("Result returned: " .. tostring(resultOk:match(resultPatternMatch):match(optPatternMatch)))
   print("Result returned: " .. tostring(resultErr:match(resultPatternMatch):match(optPatternMatch)))
 
-  print(tableToString(valSome))
+  -- print(tableToString(valSome))
 
-  print("option map returned: " .. valSome:Map(function (_) return "Okay" end))
+  print("option map returned: " .. valSome:Map(function (_) return "Okay" end):match(optPatternMatch))
+  print("option map returned: " .. valNone:Map(function (_) return "Okay" end):match(optPatternMatch))
+  print("option unwrap returned: " .. tostring(valSome:Unwrap()))
+  local val = "had no error"
+  local err = pcall(function () valNone:Unwrap() end)
+  if not err then
+    val = "error thrown, Tried to unwrap a None"
+  end
+  print("option unwrap returned: " .. val)
+  print("option Ok returned: " .. valSome:OkOr(None):match(resultPatternMatch))
+  print("option Ok returned: " .. valNone:OkOr(None):match(resultPatternMatch):match(optPatternMatch))
+
 end
 
 Main()
-
