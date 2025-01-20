@@ -1,5 +1,10 @@
+//enum Option<T> {
+//    Some(T),
+//    None,
+//}
+
 fn main() {
-    let error = Error::IdkError;
+//    let error = Error::IdkError;
     let valSome: Option<i32> = Some(111);
     let valNone: Option<i32> = None;
     let valSomeClone = valSome.clone();

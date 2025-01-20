@@ -1,0 +1,10 @@
+{
+    "diagnostics.globals": [
+        "vim",
+        "lvim",
+        "reload",
+        "pipe",
+        "ra",
+        "chain"
+    ]
+}

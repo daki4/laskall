@@ -1,3 +1,4 @@
+---@module 'adt'
 require("common")
 require("debug")
 
@@ -20,7 +21,6 @@ local function copy(obj, seen)
   return res
 end
 
-
 local funcArrMt = {
   __index = function(t, key)
     for _, entry in ipairs(t) do
@@ -36,7 +36,6 @@ function BuildAdt(typename)
   local adtFactory = { name = typename, baseState = {} }
 
   local states = setmetatable({ { func = Any, name = "Any", takesValue = false } }, funcArrMt)
-
 
   function adtFactory:Register(func, name, takesValue)
     table.insert(states, { func = func, name = name, takesValue = takesValue })
@@ -74,3 +73,4 @@ function BuildAdt(typename)
 
   return adtFactory
 end
+
