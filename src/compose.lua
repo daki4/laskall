@@ -1,4 +1,4 @@
-require("dtf")()
+require("fun")()
 
 local function id(...) return ... end
 
